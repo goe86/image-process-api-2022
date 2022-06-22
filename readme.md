@@ -51,17 +51,17 @@ Production Modules:
 
 ![scripts in the package.json file](scripts_Pkgjson.PNG)
 
-1- ```npm run dev```: This script runs a module called nodemon. the purpose on nodemon is to monitor changes happening to the file specified after nodemon
+1- ```npm run dev```: This script runs a module called nodemon. the purpose on nodemon is to monitor changes happening to the file specified after nodemon<br>
     ```python
     nodemon src/index.ts
-    ``` \n
-2- ```npm run build```: This script consists of two commands :\n
-    2-a: ```rimraf ./build```: this command deletes the build folder which has the compiled (production version) of the API
-    2-b: ```npx tsc```: this command is responsible for compiling the typescript code and have the production version in javascript.
-3- ```npm run test```: This script consists of two commands :
-    3-a: ```npx tsc```: refer to 2-b
-    3-b: ```npm run jasmine```: This command runs jasmine with config specified in the ```reporter.ts``` and ```jasmine.json```
-    Jasmine is responsible to conduct API tests to check if all aspects of the API code working as needed.
+    ``` <br>
+2- ```npm run build```: This script consists of two commands :<br>
+    2-a: ```rimraf ./build```: this command deletes the build folder which has the compiled (production version) of the API<br>
+    2-b: ```npx tsc```: this command is responsible for compiling the typescript code and have the production version in javascript.<br>
+3- ```npm run test```: This script consists of two commands :<br>
+    3-a: ```npx tsc```: refer to 2-b<br>
+    3-b: ```npm run jasmine```: This command runs jasmine with config specified in the ```reporter.ts``` and ```jasmine.json```<br>
+    Jasmine is responsible to conduct API tests to check if all aspects of the API code working as needed.<br>
 4- ```npm run format```: This Script utilizes the prettier module of nodejs and is responsible for the quality and looks of your code. it formats your code and rewrites it based on the your configuration in the ```.prettierrc``` file.
 
 # How to use the API
@@ -75,10 +75,11 @@ you create a folder called `images` under the root project folder and have all t
 then you create a ```resized``` folder inside the ```images``` folder for holding the output of the resize API.
 
 ## Second
-you start the Server by running the command 
+you start the Server by running the command<br> 
 ```bash
 node build/index.js
-```
+``` 
+<br>
 from terminal inside your project
 ## Third 
 Go to any browser of your choice and type
@@ -88,9 +89,9 @@ see the example:
 ![link to API](server_API_link.PNG)
 
 where
-```filename``` is the name of any of the images in your images folder 
-```width``` is the width you want to resize your the width of you image to 
-```height``` is the height you want to resize the height of your image to
+```filename``` is the name of any of the images in your images folder <br>
+```width``` is the width you want to resize your the width of you image to<br> 
+```height``` is the height you want to resize the height of your image to<br>
 
 
 
