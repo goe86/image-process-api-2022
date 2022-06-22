@@ -51,6 +51,9 @@ Production Modules:
 ```  
 
 # Scripts:
+
+![scripts in the package.json file](Scripts_(Pkg.json).PNG)
+
 1- ```npm run dev```: This script runs a module called nodemon. the purpose on nodemon is to monitor changes happening to the file specified after nodemon
     ```python
     nodemon src/index.ts
@@ -62,6 +65,36 @@ Production Modules:
     3-a: ```npx tsc```: refer to 2-b
     3-b: ```npm run jasmine```: This command runs jasmine with config specified in the ```reporter.ts``` and ```jasmine.json```
     Jasmine is responsible to conduct API tests to check if all aspects of the API code working as needed.
-4- ```npm run format```:
+4- ```npm run format```: This Script utilizes the prettier module of nodejs and is responsible for the quality and looks of your code. it formats your code and rewrites it based on the your configuration in the ```.prettierrc``` file.
+
+# How to use the API
+so the previous part was the developer side of the project ... now here we start seeing how you can use the API.
+
+## First
+you create a folder called `images` under the root project folder and have all the images you want in here like shown below
+
+![images_folder](images_folder.PNG)
+
+then you create a ```resized``` folder inside the ```images``` folder for holding the output of the resize API.
+
+## Second
+you start the Server by running the command 
+```bash
+node build/index.js
+```
+from terminal inside your project
+## Third 
+Go to any browser of your choice and type
+```http://localhost:3000/api/images?filename=${filename}&width=${width}&height=${height}```
+
+see the example:
+![link to API](server_API_link.PNG)
+
+where
+```filename``` is the name of any of the images in your images folder 
+```width``` is the width you want to resize your the width of you image to 
+```height``` is the height you want to resize the height of your image to
 
 
+
+Thanks 
