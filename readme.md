@@ -52,7 +52,7 @@ Production Modules:
 
 # Scripts:
 
-![scripts in the package.json file](Scripts_(Pkg.json).PNG)
+![scripts in the package.json file](Scripts_Pkgjson.PNG)
 
 1- ```npm run dev```: This script runs a module called nodemon. the purpose on nodemon is to monitor changes happening to the file specified after nodemon
     ```python
