@@ -1,7 +1,4 @@
 # Image Processing API
-## by George G. Riad
-# Name
-
 <h1 align="center">Hi 👋, I'm George Riad</h1>
 <h3 align="center">I am Passionate Full Stack Developer</h3>
 
@@ -57,8 +54,8 @@ Production Modules:
 1- ```npm run dev```: This script runs a module called nodemon. the purpose on nodemon is to monitor changes happening to the file specified after nodemon
     ```python
     nodemon src/index.ts
-    ```
-2- ```npm run build```: This script consists of two commands :
+    ``` \n
+2- ```npm run build```: This script consists of two commands :\n
     2-a: ```rimraf ./build```: this command deletes the build folder which has the compiled (production version) of the API
     2-b: ```npx tsc```: this command is responsible for compiling the typescript code and have the production version in javascript.
 3- ```npm run test```: This script consists of two commands :
