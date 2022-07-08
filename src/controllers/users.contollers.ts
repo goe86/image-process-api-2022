@@ -38,7 +38,7 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
     const user = await userModel.getOne(req.params.id)
     res.json({
       status: 'success',
-      data: user,
+      data: {...user},
       message: 'User retrieved successfully'
     })
   } catch (error) {
@@ -48,10 +48,10 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
 
 export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userModel.updateOne(req.body)
+    const uuser = await userModel.updateOne(req.body)
     res.json({
       status: 'success',
-      data: user,
+      data: uuser,
       message: 'User Updated successfully'
     })
   } catch (error) {

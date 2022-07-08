@@ -77,8 +77,8 @@ class UserModel {
     try {
       const connection = await Client.connect()
       const sql = `UPDATE users 
-                 SET email=$2 ,user_name=$3,first_name=$4,last_name=$5,password=$6 
-                 where id=$1 
+                 SET email=$2,user_name=$3,first_name=$4,last_name=$5,password=$6 
+                 where id=$1
                  RETURNING id,email,user_name,first_name,last_name;`
       const result = await connection.query(sql, [
         u.id,

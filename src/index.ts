@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000
 const app: Application = express()
 
 // HTTP request logger middleware
-app.use(morgan('short'))
+app.use(morgan('dev'))
 app.use(express.json())
 
 app.use('/api', routes)
