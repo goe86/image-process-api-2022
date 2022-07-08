@@ -14,7 +14,7 @@ const {
 export default {
   port: POSTGRES_PORT,
   host: POSTGRES_HOST,
-  database: NODE_ENV == 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST,
+  database: NODE_ENV === 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST,
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   pepper: BCRYPT_PASSWORD,
