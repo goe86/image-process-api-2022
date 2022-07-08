@@ -38,7 +38,7 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
     const user = await userModel.getOne(req.params.id)
     res.json({
       status: 'success',
-      data: {...user},
+      data: user,
       message: 'User retrieved successfully'
     })
   } catch (error) {
@@ -88,6 +88,6 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
       message: 'user authenticated successfully'
     })
   } catch (error) {
-    throw new Error(error as string)
+    next (error)
   }
 }

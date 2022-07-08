@@ -99,23 +99,21 @@ class UserModel {
   async authenticate(email: string, password: string): Promise<user | null> {
     try {
       const connection = await Client.connect()
-      const sql = 'SELECT password FROM users WHERE email=$1'
+      const sql = 'SELECT password FROM users WHERE email=$1;'
       const result = await connection.query(sql, [email])
       if (result.rows.length) {
         const { password: hashPassword } = result.rows[0]
         const isPasswordValid = bcrypt.compareSync(`${password}${config.pepper}`, hashPassword)
         if (isPasswordValid) {
-          const userInfo = await connection.query(
-            'SELECT id,email,user_name,first_name,last_name from users WHERE email=($1)',
-            [email]
-          )
+            const sql= 'SELECT id,email,user_name,first_name,last_name from users WHERE email=($1);'
+            const userInfo = await connection.query(sql,[email])
           return userInfo.rows[0]
         }
       }
       connection.release()
       return null
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(`unable to login:${(error as Error).message}`)
     }
   }
 }
