@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 
+
 const userModel = new UserModel()
 
 export const create = async (req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +42,7 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
       message: 'User retrieved successfully'
     })
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error(`Unable to retrieve user, ${(error as Error).message}`)
   }
 }
 

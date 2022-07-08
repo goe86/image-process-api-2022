@@ -16,10 +16,9 @@ class UserModel {
       const connection = await Client.connect()
       //run the query
       const sqlQuery =
-        'INSERT INTO users (id,email,user_name,first_name,last_name,password) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *;'
+        'INSERT INTO users (email,user_name,first_name,last_name,password) VALUES ($1,$2,$3,$4,$5) RETURNING *;'
       //return created user
       const result = await connection.query(sqlQuery, [
-        u.id,
         u.email,
         u.user_name,
         u.first_name,
@@ -52,7 +51,7 @@ class UserModel {
     try {
       const connection = await Client.connect()
       const sql = `SELECT id,email,user_name,first_name,last_name from users where id=($1);`
-      const result = await connection.query(sql)
+      const result = await connection.query(sql,[id])
       connection.release()
       return result.rows[0]
     } catch (error) {

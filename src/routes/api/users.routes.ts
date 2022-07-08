@@ -6,11 +6,11 @@ const uroutes = Router()
 uroutes
   .route('/')
   .get(validateTokenMiddleware, controllers.getMany) // checks and validates the token then returns all users.
-  .post(controllers.create) // creates a new user.
+  .post(validateTokenMiddleware,controllers.create) // creates a new user.
 
 uroutes
   .route('/:id')
-  .get(controllers.getOne) //returns a single user with the given id.
+  .get(validateTokenMiddleware,controllers.getOne) //returns a single user with the given id.
   .patch(validateTokenMiddleware, controllers.updateUser) // updates the user with the given id.
   .delete(validateTokenMiddleware, controllers.deleteOne) // deletes the user with the given id.
 
