@@ -7,7 +7,7 @@
   "license": "ISC",
   "description": "",
   "scripts": {
-    "test": "set NODE_ENV=test && db-migrate up --env test && npx tsc && jasmine && db-migrate reset",
+    "test": "set NODE_ENV=test && db-migrate up --env=test && npx tsc && jasmine && db-migrate reset",
     "dev": "nodemon ./src/index.ts",
     "clean": "rimraf build/",
     "build": "npm run  clean && npx tsc",

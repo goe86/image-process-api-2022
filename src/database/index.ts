@@ -3,12 +3,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const { POSTGRES_PORT, POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD } = process.env
+const { NODE_ENV,POSTGRES_PORT, POSTGRES_HOST, POSTGRES_DB,POSTGRES_DB_TEST, POSTGRES_USER, POSTGRES_PASSWORD } = process.env
 
 const Client = new Pool({
   host: POSTGRES_HOST,
   user: POSTGRES_USER,
-  database: POSTGRES_DB,
+  database: NODE_ENV ==='dev' ? POSTGRES_DB: POSTGRES_DB_TEST,
   port: parseInt(POSTGRES_PORT as string, 10),
   password: POSTGRES_PASSWORD
 })
