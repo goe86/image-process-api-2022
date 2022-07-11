@@ -5,11 +5,13 @@ This project is a demo for an online store backend. It has all the functionality
 
 # Getting Started
 **.Env Variables**
-![Enviroment Variables](../envVariables.PNG "envVariables")
+![Enviroment Variables](./envVariables.PNG "envVariables")
 
 **Database structure**
 ![Database structure](./databases.PNG "databases")
 ![Database structure1](./databases1.PNG "databases1")
+
+
 for production we use the `store_dev` and for testing we use the `store_test`
 
 you can start the project by running 
