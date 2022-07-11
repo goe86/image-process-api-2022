@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "keywords": [],
-  "author": "",
+  "author": "George Riad",
   "license": "ISC",
-  "description": "",
+  "description": "Demo of an online storefront backend",
   "scripts": {
     "test": "set NODE_ENV=test && db-migrate up --env=test && npx tsc && jasmine && db-migrate reset",
     "dev": "nodemon ./src/index.ts",

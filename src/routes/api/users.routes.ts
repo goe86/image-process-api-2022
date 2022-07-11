@@ -6,7 +6,7 @@ const uroutes = Router()
 uroutes
   .route('/')
   .get(validateTokenMiddleware, controllers.getMany) // checks and validates the token then returns all users.
-  .post(controllers.create) // creates a new user.
+  .post(validateTokenMiddleware,controllers.create) // creates a new user.
 
 uroutes
   .route('/:id')
