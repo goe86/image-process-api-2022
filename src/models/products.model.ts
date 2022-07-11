@@ -44,7 +44,7 @@ class ProductModel {
     try {
       const connection = await Client.connect()
       const sql = `SELECT * from products where id=($1);`
-      const result = await connection.query(sql)
+      const result = await connection.query(sql,[id])
       connection.release()
       return result.rows[0]
     } catch (error) {
@@ -63,6 +63,26 @@ class ProductModel {
       throw new Error(error as string)
     }
   }
-}
 
+//update a product function
+async updateOne(p: product): Promise<product> {
+  try {
+    const connection = await Client.connect()
+    const sql = `UPDATE products 
+               SET product_name=$2,product_description=$3,product_price=$4
+               where id=$1
+               RETURNING *;`
+    const result = await connection.query(sql, [
+      p.id,
+      p.product_name,
+      p.product_description,
+      p.product_price
+    ])
+    connection.release()
+    return result.rows[0]
+  } catch (error) {
+    throw new Error(error as string)
+  }
+}
+}
 export default ProductModel

@@ -31,7 +31,7 @@ export const getMany = async (_req: Request, res: Response, next: NextFunction) 
 
 export const getOne = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const product = await productModel.getOne(req.query.id as unknown as number)
+    const product = await productModel.getOne(req.params.id as unknown as number)
     res.json({
       status: 'success',
       data: product,
@@ -44,11 +44,23 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
 
 export const deleteOne = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const product = await productModel.deleteOne(req.query.id as unknown as number)
+    const product = await productModel.deleteOne(req.params.id as unknown as number)
     res.json({
       status: 'success',
       data: product,
       message: 'Product deleted successfully'
+    })
+  } catch (error) {
+    throw new Error((error as Error).message)
+  }
+}
+export const updateProduct = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const uproduct = await productModel.updateOne(req.body)
+    res.json({
+      status: 'success',
+      data: uproduct,
+      message: 'User Updated successfully'
     })
   } catch (error) {
     throw new Error((error as Error).message)

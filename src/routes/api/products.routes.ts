@@ -12,5 +12,6 @@ proutes
   .route('/:id')
   .get(validateTokenMiddleware,controllers.getOne) // returns a single Product
   .delete(validateTokenMiddleware,controllers.deleteOne) // deletes a single Product.
+  .patch(validateTokenMiddleware,controllers.updateProduct) // updates a single Product
 
 export default proutes
