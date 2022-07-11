@@ -4,6 +4,14 @@ This project is a demo for an online store backend. It has all the functionality
 2- Authenticating registered users using authentication token.
 
 # Getting Started
+**.Env Variables**
+![Enviroment Variables](../envVariables.PNG "envVariables")
+
+**Database structure**
+![Database structure](../databases.PNG "databases")
+
+for production we use the `store_dev` and for testing we use the `store_test`
+
 you can start the project by running 
 ### Development side
 run `npm run dev` for the server to start.
