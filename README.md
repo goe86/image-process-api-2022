@@ -38,8 +38,9 @@ you can start the project by running
 ### Development side
 
 ## The Scripts Used
-
+    
 ![package scripts](./packagejson.PNG "scripts")
+
 
 run `npm run dev` for the server to start.
 ### User side
