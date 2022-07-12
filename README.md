@@ -39,7 +39,7 @@ you can start the project by running
 
 ## The Scripts Used
 
-![packagescripts](./packagejson.PNG "scripts1")
+![packagescripts](./packagejson.png "scripts1")
 
 
 run `npm run dev` for the server to start.
