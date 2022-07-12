@@ -7,9 +7,28 @@ This project is a demo for an online store backend. It has all the functionality
 **.Env Variables**
 ![Enviroment Variables](./envVariables.PNG "envVariables")
 
+``` 
+# .env configurations # 
+NODE_ENV= dev
+#database configurations
+POSTGRES_PORT=5432
+POSTGRES_HOST='localhost'
+POSTGRES_DB='store_dev'
+POSTGRES_USER= 'postgres'
+POSTGRES_PASSWORD= 'abc@123'
+POSTGRES_DB_TEST='store_test'
+
+#user #
+BCRYPT_PASSWORD="hamada2022"
+SALT_ROUNDS=10
+TOKEN_SECRET="hamada2022"
+```
+
+
 **Database structure**
 ![Database structure](./databases.PNG "databases")
 ![Database structure1](./databases1.PNG "databases1")
+
 
 
 for production we use the `store_dev` and for testing we use the `store_test`
