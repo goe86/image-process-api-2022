@@ -114,19 +114,19 @@ My API is using the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
-## Steps to Completion
+
 
 ### 2. DB Creation and Migrations
 
-1- I have created the migrations of the three tables using **db-migrate create <table> --sql-file**
-2- Edited the <table> UP sql file with the required coloumns for each table. 
+1- I have created the migrations of the three tables using **db-migrate create <table> --sql-file**<br>
+2- Edited the <table> UP sql file with the required coloumns for each table.<br>
 3- added the <Drop table> in the **<table>migration down** .
 
 ### 3. Models
 
-Created the models for the USERS, PRODUCTS AND ORDERS
-for the users > **user.model.ts**
-for the products > **product.model.ts**
+Created the models for the USERS, PRODUCTS AND ORDERS<br>
+for the users > **user.model.ts**<br>
+for the products > **product.model.ts** <br>
 for the orders > **order.model.ts**
 
 ### 4. Express Controllers
