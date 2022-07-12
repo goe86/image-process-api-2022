@@ -5,6 +5,7 @@ This project is a demo for an online store backend. It has all the functionality
 
 # Getting Started
 **.Env Variables**
+
 ![Enviroment Variables](./envVariables.PNG "envVariables")
 
 ``` 
