@@ -139,6 +139,8 @@ added the validation token to the routes of the api as shown in the pictures.<br
 
 ![tokenCreation](./token.PNG)<br>
 ![tokenusage](./token1.PNG)<br>
+
+### Example of usage 
 ![tokenUsage2](./example%20token.PNG)
 
 ### 6. QA and `README.md`
