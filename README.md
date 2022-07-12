@@ -119,8 +119,8 @@ My API is using the following libraries:
 ### 2. DB Creation and Migrations
 
 1- I have created the migrations of the three tables using **db-migrate create <table> --sql-file**<br>
-2- Edited the <table> UP sql file with the required coloumns for each table.<br>
-3- added the <Drop table> in the **<table>migration down** .
+2- Edited the **table UP** sql file with the required coloumns for each table.<br>
+3- added the **Drop table** in the **<table>migration down** .
 
 ### 3. Models
 
