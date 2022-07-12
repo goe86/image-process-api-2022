@@ -36,6 +36,11 @@ for production we use the `store_dev` and for testing we use the `store_test`
 
 you can start the project by running 
 ### Development side
+
+## The Scripts Used
+
+![package scripts](./packagejson.PNG "scripts")
+
 run `npm run dev` for the server to start.
 ### User side
 go to the browser and type 
