@@ -1,6 +1,6 @@
 import Client from '../database'
-import product from '../types/product.types'
-import config from '../config'
+import {product} from '../types/product.type'
+
 
 class ProductModel {
   //create user function
@@ -28,37 +28,50 @@ class ProductModel {
   }
 
   //get all products function
-  async getAll(): Promise<product[]> {
+  async getAll(): Promise<product[]|null> {
     try {
       const connection = await Client.connect()
-      const sql = 'SELECT * from products;'
+      const sql = 'SELECT * from products ORDER BY id ASC;'
       const result = await connection.query(sql)
       connection.release()
+      if(result.rows.length)
       return result.rows
+      else return null
+      
     } catch (error) {
       throw new Error(error as string)
     }
   }
   //get product by id function
-  async getOne(id: number): Promise<product> {
+  async getOne(id: number): Promise<product | null> {
     try {
       const connection = await Client.connect()
       const sql = `SELECT * from products where id=($1);`
       const result = await connection.query(sql,[id])
       connection.release()
+      if (result.rows.length)
       return result.rows[0]
+      else{
+        return null
+      }
     } catch (error) {
       throw new Error(error as string)
     }
   }
   //delete product function
-  async deleteOne(id: number): Promise<product> {
+  async deleteOne(id: number): Promise<product|null> {
     try {
       const connection = await Client.connect()
+      const checkbyId=`SELECT * FROM products where id=$1;`
+      const checkbyIdRes=await connection.query(checkbyId,[id])
+      if(checkbyIdRes.rows.length){
       const sql = "delete from products where id=($1) RETURNING *;"
       const result = await connection.query(sql, [id])
+      const restart_seq=`alter sequence users_id_seq restart with 1;`
+      await connection.query(restart_seq) // restarts the sequence with 1
       connection.release()
       return result.rows[0]
+    } else return null
     } catch (error) {
       throw new Error(error as string)
     }

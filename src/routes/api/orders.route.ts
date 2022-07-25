@@ -1,14 +1,14 @@
-import express, { Router, Response, Request, NextFunction } from 'express'
-import * as controllers from '../../controllers/orders.controllers'
+import  express from 'express'
+import * as controllers from '../../handlers/orders.handler'
 import validateTokenMiddleware from '../../middleware/authentication.middleware'
 
-const oroutes= Router()
+const oroutes= express.Router()
 
 
 oroutes
   .route('/')
   .get(validateTokenMiddleware,controllers.getMany) // returns a list of Products.
-  .post(controllers.addOrder) // adds a new order.
+  .post(controllers.create) // adds a new order.
 
 oroutes
   .route('/:id')
@@ -16,7 +16,7 @@ oroutes
   .delete(validateTokenMiddleware,controllers.deleteOne) // deletes a single Product
 
 oroutes.route('/products/')
-  .post(controllers.create)
+  .post(controllers.addP2Order)
 
 
 export default oroutes

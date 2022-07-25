@@ -1,7 +1,8 @@
-import { Router, Response, Request, NextFunction } from 'express'
-import * as controllers from '../../controllers/users.contollers'
+import express from 'express'
+import * as controllers from '../../handlers/users.handler'
 import validateTokenMiddleware from '../../middleware/authentication.middleware'
-const uroutes = Router()
+
+const uroutes = express.Router()
 
 uroutes
   .route('/')

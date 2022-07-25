@@ -1,13 +1,11 @@
-import user from '../types/user.types'
 import UserModel from '../models/user.model'
-import { NextFunction, Request, Response } from 'express'
+import  express from 'express'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 
-
 const userModel = new UserModel()
 
-export const create = async (req: Request, res: Response, next: NextFunction) => {
+export const create = async (req: express.Request, res: express.Response) => {
   try {
     const user = await userModel.create(req.body)
     res.json({
@@ -16,11 +14,11 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
       message: `User ${user.user_name} created successfully`
     })
   } catch (error) {
-    next(error)
+    throw new Error(`Unable to Create user, ${(error as Error).message}`)
   }
 }
 
-export const getMany = async (_req: Request, res: Response, next: NextFunction) => {
+export const getMany = async (_req: express.Request, res: express.Response) => {
   try {
     const users = await userModel.getall()
     res.json({
@@ -29,24 +27,32 @@ export const getMany = async (_req: Request, res: Response, next: NextFunction) 
       message: 'Users retrieved successfully'
     })
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error(`Unable to retrieve users:${(error as Error).message}`)
   }
 }
 
-export const getOne = async (req: Request, res: Response, next: NextFunction) => {
+export const getOne = async (req: express.Request, res: express.Response) => {
   try {
-    const user = await userModel.getOne(req.params.id)
+    const user = await userModel.getOne(req.params.id as unknown as number)
+    if(!user){
+      res.json({
+        status:'Not Found',
+        data: null,
+        message:`Couldn't find user with id : ${req.params.id}`
+      })
+    }
+    else{ 
     res.json({
       status: 'success',
       data: user,
       message: 'User retrieved successfully'
-    })
+    })}
   } catch (error) {
-    throw new Error(`Unable to retrieve user, ${(error as Error).message}`)
+    throw new Error(`Unable to retrieve user: ${(error as Error).message}`)
   }
 }
 
-export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+export const updateUser = async (req: express.Request, res: express.Response) => {
   try {
     const uuser = await userModel.updateOne(req.body)
     res.json({
@@ -55,23 +61,32 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
       message: 'User Updated successfully'
     })
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error(`Unable to Update user:${(error as Error).message}`)
   }
 }
 
-export const deleteOne = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteOne = async (req: express.Request, res: express.Response) => {
   try {
-    const user = await userModel.deleteOne(req.params.id)
-    res.json({
+    const user = await userModel.deleteOne(req.params.id as unknown as number)
+    if (!user){
+      res.json({
+        status:'Not Found',
+        data:null,
+        message:`There is no user with id:${req.params.id} to delete`
+      })
+      } 
+   else{
+      res.json({
       status: 'success',
       data: user,
       message: 'User deleted successfully'
     })
+  }
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error(`Unable to delete user: ${(error as Error).message}`)
   }
 }
-export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password } = req.body
     const user = await userModel.authenticate(email, password)
@@ -88,6 +103,6 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
       message: 'user authenticated successfully'
     })
   } catch (error) {
-    next (error)
+    throw new Error((error as Error).message)
   }
 }

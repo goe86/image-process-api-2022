@@ -1,23 +1,23 @@
 const {
   NODE_ENV,
-  POSTGRES_PORT,
-  POSTGRES_HOST,
-  POSTGRES_DB,
-  POSTGRES_DB_TEST,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
+  DB_PORT,
+  DB_HOST,
+  DB_NAME,
+  DB_NAME_TEST,
+  DB_USER,
+  DB_PASS,
   BCRYPT_PASSWORD,
   SALT_ROUNDS,
-  TOKEN_SECRET
+  JWT_SECRET
 } = process.env
 
 export default {
-  port: POSTGRES_PORT,
-  host: POSTGRES_HOST,
-  database: NODE_ENV === 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST,
-  user: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
+  port: DB_PORT,
+  host: DB_HOST,
+  database: NODE_ENV === 'dev' ? DB_NAME : DB_NAME_TEST,
+  user: DB_USER,
+  password: DB_PASS,
   pepper: BCRYPT_PASSWORD,
   salt: SALT_ROUNDS,
-  tokenSecret: TOKEN_SECRET
+  tokenSecret: JWT_SECRET
 }

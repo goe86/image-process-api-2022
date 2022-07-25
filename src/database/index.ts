@@ -1,19 +1,24 @@
 import { Pool } from 'pg'
 import dotenv from 'dotenv'
+import {response} from 'express'
 
 dotenv.config()
 
-const { NODE_ENV,POSTGRES_PORT, POSTGRES_HOST, POSTGRES_DB,POSTGRES_DB_TEST, POSTGRES_USER, POSTGRES_PASSWORD } = process.env
-
-const Client = new Pool({
-  host: POSTGRES_HOST,
-  user: POSTGRES_USER,
-  database: NODE_ENV ==='dev' ? POSTGRES_DB: POSTGRES_DB_TEST,
-  port: parseInt(POSTGRES_PORT as string, 10),
-  password: POSTGRES_PASSWORD
+//create new database instance 
+const db = new Pool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.NODE_ENV ==='dev' ? process.env.DB_NAME: process.env.DB_NAME_TEST,
+  port: parseInt(process.env.DB_PORT as string, 10),
+  password: process.env.DB_PASS
 })
-Client.on('error', (error: Error) => {
+// Connecting to database Error Handling
+db.on('error', (error: Error) => {
   console.error(error.message)
+  response.json({
+    status:"Error",
+    data:error.message
+    })
 })
 
-export default Client
+export default db

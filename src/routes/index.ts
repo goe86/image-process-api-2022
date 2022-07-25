@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import proutes from './api/products.routes'
-import uroutes from './api/users.routes'
-import oroutes from './api/orders.routes'
+import express from 'express'
+import proutes from './api/products.route'
+import uroutes from './api/users.route'
+import oroutes from './api/orders.route'
 
-const routes = Router()
+const routes = express.Router()
 
 routes.use('/users/', uroutes)
 routes.use('/products/', proutes)

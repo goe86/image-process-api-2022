@@ -1,4 +1,4 @@
-type user = {
+export type user = {
   id?: string
   email: string
   user_name: string
@@ -7,4 +7,3 @@ type user = {
   password: string
 }
 
-export default user

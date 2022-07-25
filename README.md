@@ -5,46 +5,72 @@ This project is a demo for an online store backend. It has all the functionality
 
 # Getting Started
 **.Env Variables**
-
-![Enviroment Variables](./envVariables.PNG "envVariables")
+YOU MUST ADD THE BELOW VARIABLES IN A `DOTENV`CONFIG FILE
+![Enviroment Variables](./docs/DOTENV_VARIABLES.jpg "envVariables")
 
 ``` 
-# .env configurations # 
-NODE_ENV= dev
-#database configurations
-POSTGRES_PORT=5432
-POSTGRES_HOST='localhost'
-POSTGRES_DB='store_dev'
-POSTGRES_USER= 'postgres'
-POSTGRES_PASSWORD= 'abc@123'
-POSTGRES_DB_TEST='store_test'
-
-#user #
-BCRYPT_PASSWORD="hamada2022"
+NODE_ENV='dev'
+DB_HOST='localhost'
+DB_NAME='shopping'
+DB_USER='shopping_user'
+DB_PASS='password123'
+DB_PORT=5432
+DB_NAME_TEST='shopping_test'
+BCRYPT_PASSWORD='Pa$$w0rd'
 SALT_ROUNDS=10
-TOKEN_SECRET="hamada2022"
+JWT_SECRET='Pa$$w0rd'
 ```
 
 
 **Database structure**
-![Database structure](./databases.PNG "databases")
-![Database structure1](./databases1.PNG "databases1")
+THE DATABASE STRUCTURE CAN BE UNDERSTOOD USING THE FOLLOWING DIAGRAM<BR>
 
 
 
-for production we use the `store_dev` and for testing we use the `store_test`
+![Database Schema](./docs/DATABASE_SCHEMA.jpg)
+![Database Schema2](./docs/DB_STRUCTURE_USER_AND_TABLES.jpg)
+
 
 
 ### Development side
 
 ## The Scripts Used
+here we will begin by showing you the scripts used to run the backend server
 
-![packagescripts](./packagejson.png "scripts1")
+![packagescripts](./docs/SCRIPTS_PKGJSON.jpg "scripts1")
+
+
+# First
+open `postgresql` and create a table called **shopping** using this command: <br>
+```sql
+CREATE TABLE shopping;
+```
+Then , create a user and give him full privilege on database **shopping** as follows:
+```sql
+CREATE USER shopping_user PASSWORD 'password123';
+```
+
+Then connect to the database using this command:<br>
+```
+\c shopping
+```
+
+Then , Granting privileges as follows:
+```sql
+GRANT ALL PRIVILEGES ON DATABASE shopping TO shopping_user; 
+```
+run `npm run dev-up` <br>
+This script is used to migrate the database schema and tables to the postgres so that you are ready to run the app.<br>
+![DATABASE MIGRATIONS](./docs/DB-migrate-up-success.jpg)
+
+WHEN YOU OPEN  `POSTGRESQL` and connect to the database `shopping`   
 
 you can start the project by running <br>
-run `npm run dev` for the server to start.
+run `npm run dev` for the server to start. you will see a message in the console of your vscode that the **server is running at PORT:3000**
+
+
 ### User side
-go to the browser and type<br>
+go to the `postman app` and type<br>
 ```
 http://localhost:3000/
 ```
@@ -56,14 +82,20 @@ http://localhost:3000/api/users
 ```
 ## if you use a get request you can:
 1- Get all users as json object<br>
+![GET ALL USERS](./DOCS/GETALL_USERS_SUCCESS.jpg)
 2- Get one User (if you specify the user id in the parameters `http://localhost:3000/api/users/:id`) **ex:** (localhost:3000/api/users/2)
+![GET ON USER](./DOCS/GETONE_USER_SUCCESS.jpg)
 
 ## if you use the post request you can :
 1- Create a new User<br>
-2- Authenticate the User (if you specify the email and password in the request body `http://localhost:3000/api/users/`)
+![CREATE NEW USER](./docs/CREATE_USER_SUCCESS.jpg)
+2- Authenticate the User (if you specify the email and password in the request body `http://localhost:3000/api/users/authenticate`)
+![Authenticate](./docs/AUTHENTICATE_USER_SUCCESS.jpg)
 
 ## if you use the patch request you can:
 1- Update a User (if you specify the user id in the parameters `http://localhost:3000/api/users/:id`)
+![updatea user](./docs/UPDATE_USER_SUCCESS.jpg)
+
 
 ## if you use the delete request you can:
 1- Delete a User (if you specify the user id in the parameters `http://localhost:3000/api/users/:id`)
@@ -83,12 +115,16 @@ you have to pass the above parameters in the **Request.Body** .
 # Products Routes 
 ## if you use a get request you can:
 1- Get all products as json object<br>
+![GET ALL PRODUCTS](./docs/GETALL_PRODUCTS_SUCCESS.jpg)
 2- Get one product (if you specify the product id in the parameters `http://localhost:3000/api/products/:id`) **ex:** (localhost:3000/api/products/2)
+![GET ONE PRODUCT](./docs/GETONE_PRODUCT_SUCCESS.jpg)
 
 ## if you use the post request you can :
 1- Create a new product (http://localhost:3000/api/products/)<br>
+![CREATE PRODUCT](./docs/CREATE_PRODUCT_SUCCESS.jpg)
 ## if you use the patch request you can:
 1- Update a product (if you specify the user id in the parameters `http://localhost:3000/api/products/:id`)
+![UPDATE A PRODUCT](./docs/UPDATE_PRODUCT_SUCCESS.jpg)
 
 ## if you use the delete request you can:
 1- Delete a product (if you specify the user id in the parameters `http://localhost:3000/api/products/:id`)
@@ -102,6 +138,27 @@ The product table has the following coloumns:
 ``` 
 you have to pass the above parameters in the **Request.Body** .
 
+# Orders
+you can **create an order** by going to:
+`httP://localhost:3000/api/orders`
+choose TYPE POST REQUEST
+and in the body of the request you add the id, status and user_id as a json object.
+
+![CREATE ORDER](./DOCS/CREATE_ORDER_SUCCESS.jpg)
+
+AFTER CREATING THE ORDER YOU CAN ADD PRODUCTS TO IT BY GOING TO :<BR>
+`http://localhost:3000/api/orders/products` 
+
+
+![ADDING PRODUCT TO ORDER](./docs/ADDING_PRODUCTS_TO_ORDERS.jpg)
+
+
+### GET ORDERS
+
+IN ORDER TO GET ORDERS AND VIEW THEM <BR>
+
+YOU USE THE GET REQUEST WITH 
+`http://localhost:3000/api/orders/`
 
 # Required Technologies
 
@@ -113,14 +170,8 @@ My API is using the following libraries:
 - db-migrate from npm for migrations
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
+- bcrypt for password hashing 
 
-
-
-### 2. DB Creation and Migrations
-
-1- I have created the migrations of the three tables using **db-migrate create <table> --sql-file**<br>
-2- Edited the **table UP** sql file with the required coloumns for each table.<br>
-3- added the **Drop table** in the **<table>migration down** .
 
 ### 3. Models
 
@@ -136,11 +187,9 @@ Set up multiple controllers for different API functionality <br>
 ### 5. JWTs
 
 added the validation token to the routes of the api as shown in the pictures.<br>
-
-![tokenCreation](./token.PNG)<br>
-![tokenusage](./token1.PNG)<br>
+![USER AUTHENTICATION AND TOKEN CREATION](./docs/USER_AUTHENTICATION_AND%20TOKEN%20CREATION.jpg)
 
 ### Example of usage 
-![tokenUsage2](./example%20token.PNG)
+![USER AUTHENTICATED SUCCESSFULLY](./docs/AUTHENTICATE_USER_SUCCESS.jpg)
 
 ## For further assistance Contact me George @ georgegamil1986@hotmail.com

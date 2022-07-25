@@ -1,5 +1,5 @@
-import express, { Router, Response, Request, NextFunction } from 'express'
-import * as controllers from '../../controllers/products.controllers'
+import express from 'express'
+import * as controllers from '../../handlers/products.handler'
 import validateTokenMiddleware from '../../middleware/authentication.middleware'
 
 const proutes = express.Router()
@@ -7,7 +7,7 @@ const proutes = express.Router()
 proutes
   .route('/')
   .get(validateTokenMiddleware,controllers.getMany) // returns a list of Products.
-  .post(validateTokenMiddleware,controllers.create) // creates a new Product.
+  .post(controllers.create) // creates a new Product.
 proutes
   .route('/:id')
   .get(validateTokenMiddleware,controllers.getOne) // returns a single Product

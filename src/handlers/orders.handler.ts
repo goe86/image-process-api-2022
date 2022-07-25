@@ -16,7 +16,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
   }
 }
 
-export const getMany = async (_req: Request, res: Response, next: NextFunction) => {
+export const getMany = async (_req: Request, res: Response) => {
   try {
     const orders = await orderModel.getAll()
     res.json({
@@ -29,7 +29,7 @@ export const getMany = async (_req: Request, res: Response, next: NextFunction) 
   }
 }
 
-export const getOne = async (req: Request, res: Response, next: NextFunction) => {
+export const getOne = async (req: Request, res: Response) => {
   try {
     const order = await orderModel.getOne(req.params.id as unknown as number)
     res.json({
@@ -42,7 +42,7 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
   }
 }
 
-export const deleteOne = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteOne = async (req: Request, res: Response) => {
   try {
     const order = await orderModel.deleteOne(req.params.id as unknown as number)
     res.json({
@@ -54,16 +54,15 @@ export const deleteOne = async (req: Request, res: Response, next: NextFunction)
     throw new Error((error as Error).message)
   }
 }
-export const addOrder = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const order = await orderModel.addOrder(req.body)
-      res.json({
-        status: 'success',
-        data: order,
-        message: 'Order Added successfully'
-      })
-    } catch (error) {
-      throw new Error((error as Error).message)
-    }
+export const addP2Order = async (req: Request, res: Response) => {
+  try {
+    const order = await orderModel.addP2Order(req.body)
+    res.json({
+      status: 'success',
+      data: order,
+      message: 'Products Added successfully'
+    })
+  } catch (error) {
+    throw new Error((error as Error).message)
+  }
 }
-
